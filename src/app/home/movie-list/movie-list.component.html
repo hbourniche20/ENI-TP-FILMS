@@ -1,0 +1,14 @@
+<ion-list style="display: inline-block" *ngFor="let movie of movieList; index as i">
+  <ion-card style="display: block">
+    <ion-card-header>
+      <ion-label>{{movie.Title}}</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="movie.Poster"></ion-img>
+      <ion-button (click)="onLikeMovie(movie)">
+        <ion-icon *ngIf="movie.liked" name="heart-circle-outline"></ion-icon>
+        <ion-icon *ngIf="!movie.liked" name="heart-dislike-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-list>

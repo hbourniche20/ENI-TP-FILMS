@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from '../DataService';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor() {}
+  movieList: any[];
+  likeMovieList: any[];
+  isFavouriteView = false;
 
+  constructor(private dataService: DataService) {}
+
+  ngOnInit() {
+    this.movieList = this.dataService.movieList;
+    this.likeMovieList = this.dataService.likeMovieList;
+  }
 }
