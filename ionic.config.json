@@ -1,0 +1,7 @@
+{
+  "name": "OMTpApi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
