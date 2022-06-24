@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
+    this.dataService.fetchLikeMovieList();
     this.movieList = this.dataService.movieList;
     this.likeMovieList = this.dataService.likeMovieList;
   }

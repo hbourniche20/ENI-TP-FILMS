@@ -1,10 +1,27 @@
+import {HttpClient} from '@angular/common/http';
+import {DB_LINK} from './cst';
+import {Injectable, OnInit} from '@angular/core';
 
+@Injectable()
 export class DataService {
 
   movieList: any[] = [];
   likeMovieList: any[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
+  }
+
+  fetchLikeMovieList() {
+    this.http.get(DB_LINK).subscribe(
+      (data: any) => {
+        console.log(data);
+        for (const attribut in data) {
+          console.log(attribut);
+          this.likeMovieList.push(data[attribut]);
+        }
+        console.log(this.likeMovieList);
+      }
+    );
   }
 
   updateSearchList(list: any[]) {
@@ -20,9 +37,15 @@ export class DataService {
     if (moviePosition > -1) {
       this.likeMovieList.splice(moviePosition, 1);
       movie.liked = false;
+      this.http.delete(DB_LINK, movie).subscribe(
+        () => console.log('DELETE OK')
+      );
     } else {
       this.likeMovieList.push(movie);
       movie.liked = true;
+      this.http.post(DB_LINK, movie).subscribe(
+        () => console.log('POST OK')
+      );
     }
   }
 
